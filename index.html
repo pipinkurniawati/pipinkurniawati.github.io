@@ -61,8 +61,12 @@
 						<p style="text-indent: 0em; margin-bottom: 0em; text-align: justify;"><b>Case 1</b></p>
 						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"><i>skip[i+j]=k, skip[i+j]&gtsuf[i]</i> dan <i>suff[i]=i+1</i> : <i>occurence</i> (segmen yang match) ditemukan pada posisi j, kemudian <i>skip[j+m-1]</i> di set dengan nilai m. Lihat gambar dibawah</p>
 						<div style="text-align: center"><img src="images/img16.jpg" width="562" height="177" /></div>
-						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Pada gambar diatas, pada percobaan selanjutnya segmen <i>suff[i]</i> tidak dibandingkan lagi sebab telah terbukti <i>match</i> melalui tabel skip</p> <br />
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Pada gambar diatas, pada percobaan selanjutnya setelah dilakukan pergeseran, segmen <i>suff[i]</i> tidak dibandingkan lagi sebab telah terbukti <i>match</i> melalui tabel skip</p> <br />
 						<p style="text-indent: 0em; margin-bottom: 0em; text-align: justify;"><b>Case 2</b></p>
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"><i>skip[i+j]=k, skip[i+j]&gtsuf[i]</i> dan <i>suff[i]&lt=i</i> : <i>mismatch</i> (ketidakcocokan) terjadi antara karakter <i>x[i-suff[i]]</i> dan </i>y[i+j-suff[i]]</i> dan kemudian <i>skip[j+m-1]</i> diisi dengan nilai <i>m-1-i+suff[i]</i>.</p>
+						<div style="text-align: center"><img src="images/img17.jpg" width="562" height="189" /></div>
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Pergeseran dilakukan menggunakan fungsi preprosesing Boyer-Moore tabel <i>bmBc[y[i+j-suff[i]]</i> dan <i>bmGs[i-suff[i]+1]</i>.</p> <br />
+						<p style="text-indent: 0em; margin-bottom: 0em; text-align: justify;"><b>Case 3</b></p>
 						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"></p>
 
 						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"></p>
