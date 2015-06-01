@@ -33,7 +33,7 @@
 					<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Perkembangan tersebut termasuk didalamnya kemajuan teknologi aplikasi yang memanfaatkan algortima-algoritma yang ada. Salah satu aplikasi yang sedang sangat digemari dan berkembang sekarang adalah aplikasi yang menerapkan algoritma <i>pattern</i> / <i>string matching</i>. Mulai dari aplikasi yang dapat digunakan untuk berkomunikasi seperti chatbox, sampai aplikasi yang digunakan sebagai mesin pencari (<i>search engine</i>).</p>
 					<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Algoritma pencarian string sendiri merupakan algoritma yang paling penting dalam pemrosesan teks. Algoritma ini juga merupakan komponen dasar dalam implementasi perangkat-perangkat lunak dalam kebanyakan sistem operasi yang ada saat ini. Algoritma pencarian string ini dapat dibagi menjadi dua jenis yaitu algoritma yang mencari string dari kiri-ke-kanan dan juga algoritma yang mencari string dari kanan-ke-kiri.</p>
 					<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Algoritma Apostolico-Giancarlo merupakan algoritma pencarian string jenis kedua, yaitu algoritma pencarian string dari kanan-ke-kiri. Algoritma ini merupakan pengembangan lebih lanjut dari algoritma Boyer-Moore. Algoritma ini dapat dikatakan menyempurnakan algoritma Boyer-Moore sehingga menjadi lebih mangkus.</p>
-					<p style="text-indent: 2em; margin-bottom: 4em; text-align: justify;">Nah untuk lebih memahami mengapa algoritma Apostolico-Giancarlo ini lebih mangkus dan lebih cepat waktu komputasinya, mari kita pahami algoritma Boyer-Moore terlebih dahulu.</p>
+					<p style="text-indent: 2em; margin-bottom: 4em; text-align: justify;">Nah untuk lebih memahami mengapa algoritma Apostolico-Giancarlo ini lebih mangkus dan lebih cepat waktu komputasinya, mari kita pahami algoritma Boyer-Moore terlebih dahulu. Jika sudah mengerti cara kerjanya langsung skip saja hehe :D.</p>
 
 					<h2 class="title" style="margin-bottom: 0em;">A Brief Explanation of Boyer-Moore</a></h2>
 					<div class="entry">
@@ -53,8 +53,7 @@
 					</div>
 					<h2 class="title">A Closer Look at Apostolico-Giancarlo</a></h2>
 					<div class="entry">
-
-						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"></p>
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Nah pada bagian ini kita akan mengenal algoritma Apostolico-Giancarlo. Setelah mengenal algoritma Boyer-Moore, kita mengetahui bahwa pada setiap percobaan (satu percobaan diasumsikan sebagai satu kali usaha mensejajarkan pattern dengan teks pada indeks tertentu), tidak terdapat variabel yang dapat mengingat karakter yang telah <i>match</i>. Algoritma Apostolico-Giancarlo mengatasi masalah ini dengan menambahkan satu fungsi preprosesor yang menghasilkan tabel dinamis bernama <i>skip</i> untuk menyimpan panjang sufix pada tiap percobaan. Informasi sufix sendiri dapat diperoleh dari fungsi preprosesor <i>good-suffix</i> (preprosesor Boyer-Moore) untuk menghasilkan tabel <i>bmGs</i>.</p>
 
 						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"></p>
 
