@@ -45,16 +45,16 @@
 						<div style="text-align: center"><img src="images/img12.jpg" width="562" height="162" /></div>
 						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Sedangkan pergerseran <i>good-suffix</i> terjadi saat sekuens karakter <i>x[i+1..m-1]=y[i+j+1..j+m-1]=u</i> dan <i>x[i]</i> tidak sama dengan <i>y[i+j]</i>. Pergeseran dilakukan dengan mensejajarkan segmen <i>y[i+j+1..j+m-1]</i> dengan segmen yang sama pada pattern yang terdapat di posisi yang berbeda dan juga didahului oleh karakter yang berbeda (<i>x[i]1</i> tidak sama dengan <i>x[i]2</i>).</p>
 						<div style="text-align: center"><img src="images/img13.jpg" width="562" height="183" /></div>
-						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Jika segmen <i>y[i+j+1..j+m-1]</i> tidak terdapat di posisi lain pada pattern, maka pergeseran dilakukan dengan mensejajarkan sufix terpanjang <i>v</i> dari <i>y[i+j+1..j+m-1]</i> dengan prefix dari x yang bersesuaian. Lihat gambar dibawah ini.</p>
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Jika segmen <i>y[i+j+1..j+m-1]</i> tidak terdapat di posisi lain pada pattern, maka pergeseran dilakukan dengan mensejajarkan sufiks terpanjang <i>v</i> dari <i>y[i+j+1..j+m-1]</i> dengan prefix dari x yang bersesuaian. Lihat gambar dibawah ini.</p>
 						<div style="text-align: center"><img src="images/img14.jpg" width="562" height="162" /></div>
 						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Berdasarkan kedua fungsi preposesor yang telah dijelaskan diatas, jumlah pergeseran pattern dilakukan dengan mengambil nilai maksimum di antara kedua fungsi. Pergeseran <i>bad-character</i> disimpan didalam tabel <i>bmBc</i>, sedangkan pergeseran <i>good-suffix</i> disimpan didalam tabe; <i>bmGs</i>.</p>
-						<p style="text-indent: 2em; margin-bottom: 4em; text-align: justify;">Preprosesor tabel <i>bmGs</i> dan <i>bmGc</i> masing-masing memiliki kompleksitas <b>O</b>(<i>m+l</i>). Sedangkan kompleksitas waktu pencarian terburuk adalah kuadratik, namun umumnya <b>O</b>(<i>mn</i>) sehingga algoritma ini lebih efisien dibanding algoritma <i>string matching</i> brute-force atau beberapa algoritma <i>string matching</i> lainnya.</p>
+						<p style="text-indent: 2em; margin-bottom: 4em; text-align: justify;">Preprosesor tabel <i>bmGs</i> dan <i>bmGc</i> masing-masing memiliki kompleksitas <i><b>O</b>(m+o)</i>. Sedangkan kompleksitas waktu pencarian adalah <i><b>O</b>(mn)</i>, umumnya <i><b>O</b>(3n)</i>, namun saat <i>best performance</i> adalah <i><b>O</b>(m/n)</i> sehingga algoritma ini lebih efisien dibanding algoritma <i>string matching</i> brute-force atau beberapa algoritma <i>string matching</i> lainnya.</p>
 
 					</div>
 					<h2 class="title">A Closer Look at Apostolico-Giancarlo</a></h2>
 					<div class="entry">
-						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Nah pada bagian ini kita akan mengenal algoritma Apostolico-Giancarlo. Setelah mengenal algoritma Boyer-Moore, kita mengetahui bahwa pada setiap percobaan (satu percobaan diasumsikan sebagai satu kali usaha mensejajarkan pattern dengan teks pada indeks tertentu), tidak terdapat variabel yang dapat mengingat karakter yang telah <i>match</i>. Algoritma Apostolico-Giancarlo mengatasi masalah ini dengan menambahkan satu fungsi preprosesor yang menghasilkan tabel dinamis bernama <i>skip</i> untuk menyimpan panjang sufix pada tiap percobaan. Informasi sufix sendiri dapat diperoleh dari fungsi preprosesor <i>good-suffix</i> (preprosesor Boyer-Moore) untuk menghasilkan tabel <i>bmGs</i>. Karakter yang telah <i>matched</i> ini disimpan guna memaksimalkan pergeseran pattern.</p>
-						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Sekarang kita lihat bagaimana algoritma ini melakuukan <i>scanning</i> terhadap teks tempat pencarian. Misalnya saat pattern <i>x</i> disejajarkan dengan teks <i>y[j0..j0+m-1]</i>, lalu terdapat sufix dari pattern dengan panjang <i>k</i> sehingga <i>skip[i+j0]=k</i> dan <i>x[m-k..m-1]=y[j0+m-k..j0+m-1]</i> dan <i>x[m-k-1]</i> tidak sama dengan <i>y[j0+m-k-1]</i>. Lalu saat percobaan selanjutnya pattern disejajarkan dengan teks <i>y[j..j+m-1]</i> dengan nilai<i>j0</i> lebih kecil dibanding nilai <i>j</i>. <i>Match</i> terjadi pada <i>x[i+1..m-1]=y[j0+m-k..j0+m-1]</i> dimana <i>i=m-(j-j0)-1</i>, perhatikan gambar dibawah ini.</p>
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Nah pada bagian ini kita akan mengenal algoritma Apostolico-Giancarlo. Setelah mengenal algoritma Boyer-Moore, kita mengetahui bahwa pada setiap percobaan (satu percobaan diasumsikan sebagai satu kali usaha mensejajarkan pattern dengan teks pada indeks tertentu), tidak terdapat variabel yang dapat mengingat karakter yang telah <i>match</i>. Algoritma Apostolico-Giancarlo mengatasi masalah ini dengan menambahkan satu fungsi preprosesor yang menghasilkan tabel dinamis bernama <i>skip</i> untuk menyimpan panjang sufiks pada tiap percobaan. Informasi sufiks sendiri dapat diperoleh dari fungsi preprosesor <i>good-suffix</i> (preprosesor Boyer-Moore) untuk menghasilkan tabel <i>bmGs</i>. Karakter yang telah <i>matched</i> ini disimpan guna memaksimalkan pergeseran pattern.</p>
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Sekarang kita lihat bagaimana algoritma ini melakuukan <i>scanning</i> terhadap teks tempat pencarian. Misalnya saat pattern <i>x</i> disejajarkan dengan teks <i>y[j0..j0+m-1]</i>, lalu terdapat sufiks dari pattern dengan panjang <i>k</i> sehingga <i>skip[i+j0]=k</i> dan <i>x[m-k..m-1]=y[j0+m-k..j0+m-1]</i> dan <i>x[m-k-1]</i> tidak sama dengan <i>y[j0+m-k-1]</i>. Lalu saat percobaan selanjutnya pattern disejajarkan dengan teks <i>y[j..j+m-1]</i> dengan nilai<i>j0</i> lebih kecil dibanding nilai <i>j</i>. <i>Match</i> terjadi pada <i>x[i+1..m-1]=y[j0+m-k..j0+m-1]</i> dimana <i>i=m-(j-j0)-1</i>, perhatikan gambar dibawah ini.</p>
 						<div style="text-align: center"><img src="images/img15.jpg" width="562" height="258" /></div>
 						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Terdapat empat kemungkinan kondisi yang dapat terjadi, yaitu:</p>
 						<br />
@@ -67,14 +67,21 @@
 						<div style="text-align: center"><img src="images/img17.jpg" width="562" height="189" /></div>
 						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Pergeseran dilakukan menggunakan fungsi preprosesing Boyer-Moore tabel <i>bmBc[y[i+j-suff[i]]</i> dan <i>bmGs[i-suff[i]+1]</i>.</p> <br />
 						<p style="text-indent: 0em; margin-bottom: 0em; text-align: justify;"><b>Case 3</b></p>
-						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"></p>
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"><i>skip[i+j]=k, skip[i+j]&ltsuf[i]</i> : <i>mismatch</i> (ketidakcocokan) terjadi antara karakter <i>x[i-skip[i+j]]</i> dan </i>y[i+j-skip[i+j]]</i> dan kemudian <i>skip[j+m-1]</i> diisi/di set dengan nilai <i>m-1-i+skip[i+j]</i>.</p>
+						<div style="text-align: center"><img src="images/img18.jpg" width="562" height="176" /></div>
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Pergeseran dilakukan menggunakan fungsi preprosesing Boyer-Moore tabel <i>bmBc[y[i+j-skip[i+j]]</i> dan <i>bmGs[i-skip[i+j]+1]</i>.</p> <br />
 
-						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"></p>
-
-						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"></p>
-
-						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"></p>
-
+						<p style="text-indent: 0em; margin-bottom: 0em; text-align: justify;"><b>Case 4</b></p>
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"><i>skip[i+j]=k, skip[i+j]=suf[i]</i> : kondisi ini menyebabkan terjadinya <i>"jump"</i> terhadap faktor teks </i>y[i+j+k+1..i+j]</i> agar selanjutnya dapat dilakukan perbandingan karakter yang tersisa pada pattern <i>x[i-k]</i> dengan teks <i>y[i+j-k}</i> Perhatikan gambar dibawah.</p>
+						<div style="text-align: center"><img src="images/img19.jpg" width="562" height="176" /></div>
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Pada gambar diatas, pada percobaan selanjutnya setelah dilakukan <i>"jump"</i>, segmen <i>suff[i]</i> tidak dibandingkan lagi sebab telah terbukti <i>match</i></p> <br />
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Keempat kondisi diatas dapat terpenuhi jika jumlah karakter sufiks terpanjang dari pattern <i>x</i> pada posisi <i>i</i> diketahui. Algoritma Apostolico-Giancarlo menggunakan dua tabel yaitu:</p>
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"><b>Tabel <i>skip</i></b>, berupa tabel dinamis yang diperbaharui/ditambahkan di akhir informasi panjang sufiks pada setiap percobaan</p>
+						<p style="text-indent: 9em; margin-bottom: 0em; text-align: justify;"><b><i>skip[j+m-1]=max{k : x[m-k..m-1]=y[j+m-k .. j+m-1]}</i></b></p><br />
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;"><b>Tabel <i>suff</i></b>, yang dapat diperoleh melalui fungsi preprosesor <i>good-suffix</i> untuk menghasilkan tabel <i>bmGs</i>.</p>
+						<p style="text-indent: 9em; margin-bottom: 0em; text-align: justify;"><b><i>untuk i 1&lt=i&ltmsuff[i]=max{k : x[i-k+1 .. i]=x[m-k .. m-1]}</i></b></p><br />
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Kompleksitas ruang dan waktu fungsi preprosesing algoritma ini sama seperti kompleksitas fungsi preprosesing Boyer-Moore yaitu <i><b>O</b>(m+o)</i>. Sedangkan pada fase pencarian kompleksitas ruang pembentukan tabel skip adalah <i><b>O</b>(m)</i>, kompleksitas waktu perbandingan adalah<i><b>O</b>(n)</i> dengan <i>worse case</i> <i><b>O</b>(3n/2)</i>.</p>
+						<p style="text-indent: 2em; margin-bottom: 0em; text-align: justify;">Nah, jika dilihat dari kompleksitas pada fase pencarian, algoritma Apostolico-Giancarlo ini akan memiliki waktu komputasi lebih cepat. Hal ini dikarenakan algoritma ini menyimpan informasi panjang karakter yang telah <i>match</i> sehingga saat terpenuhi kondisi yang keempat, perbandingan karakter (<i>suff[i]</i>) tidak terjadi lagi.</p>
 					</div>
 				</div>
 				<div style="clear: both;">&nbsp;</div>
@@ -85,7 +92,7 @@
 				<div>
 					<h2>Recent Posts</h2>
 					<ul class="list-style1">
-						<li class="first"><a href="#">Pellentesque quis elit non lectus gravida blandit.</a></li>
+						<li class="first"><a href="#">Apostolico-Giancarlo Algorithm.</a></li>
 					</ul>
 				</div>
 			</div>
@@ -99,31 +106,31 @@
 		<div id="three-column" class="container">
 			<div id="tbox1">
 				<div class="box-style">
-					<div class="image"><img src="images/img07.jpg" width="320" height="170" alt="" /></div>
+					<div class="image" style="text-align: center"><img src="images/img20.jpg" width="250" height="291" alt="" /></div>
 					<div class="arrow"></div>
-					<div class="content">
-						<h2>Fusce ultrices fringilla</h2>
-						<p>Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum. Integer nisl risus, sagittis convallis, rutrum id, elementum congue, nibh. </p>
+					<div class="content" style="text-align: center">
+						<h2>Alberto Apostolico</h2>
+						<p>Professor Apostolico's research interests are in the areas of algorithmic analysis, design and application. Most of his work deals with algorithms and data structures for combinatorial pattern matching and discovery problems as arising in text editing, data compression, picture processing, biomolecular sequence analysis, etc. He and R.Giancarlo invented the Apostolico–Giancarlo algorithm.</p>
 					</div>
 				</div>
 			</div>
 			<div id="tbox2">
 				<div class="box-style">
-					<div class="image"><img src="images/img08.jpg" width="320" height="170" alt="" /></div>
+					<div class="image" style="text-align: center"><img src="images/img21.jpg" width="250" height="291" alt="" /></div>
 					<div class="arrow"></div>
-					<div class="content">
-						<h2>Mauris vulputate dolor</h2>
-						<p>Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum. Integer nisl risus, sagittis convallis, rutrum id, elementum congue, nibh. </p>
+					<div class="content" style="text-align: center">
+						<h2>Robert Stephen Boyer</h2>
+						<p>Robert S. Boyer, is a retired professor of computer science, mathematics, and philosophy at The University of Texas at Austin. He and J Strother Moore invented the Boyer–Moore string search algorithm, a particularly efficient string searching algorithm, in 1977. He and Moore also collaborated on the Boyer–Moore automated theorem prover, Nqthm, in 1992.</p>
 					</div>
 				</div>
 			</div>
 			<div id="tbox3">
 				<div class="box-style">
-					<div class="image"><img src="images/img09.jpg" width="320" height="170" alt="" /></div>
+					<div class="image" style="text-align: center"><img src="images/img22.jpg" width="250" height="291" alt="" /></div>
 					<div class="arrow"></div>
-					<div class="content">
-						<h2>Nulla luctus eleifend </h2>
-						<p>Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum. Integer nisl risus, sagittis convallis, rutrum id, elementum congue, nibh.</p>
+					<div class="content" style="text-align: center">
+						<h2>J Strother Moore</h2>
+						<p>J Strother Moore is a computer scientist, and he is a co-developer of the Boyer–Moore string search algorithm and the Boyer–Moore automated theorem prover, Nqthm. Moore received his SB in mathematics at Massachusetts Institute of Technology in 1970 and his Ph.D in computational logic at University of Edinburgh in Scotland in 1973.</p>
 					</div>
 				</div>
 			</div>
@@ -131,38 +138,19 @@
 	</div>
 	<!--end of wrapper-->
 
-	<div id="footer-content" class="container">
-		<div id="footer-bg">
-			<div id="column1">
-				<h2>Welcome to my website</h2>
-				<p>In posuere eleifend odio quisque semper augue mattis wisi maecenas ligula. Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum. Quisque dictum integer nisl risus, sagittis convallis, rutrum id, congue, and nibh. Pellentesque tristique ante ut risus. Quisque dictum. Integer nisl risus, sagittis convallis, rutrum id, elementum congue, nibh. Suspendisse dictum porta lectus.<br />
-				</p>
-			</div>
-			<div id="column2">
-				<h2>Etiam rhoncus volutpat</h2>
-				<ul class="list-style2">
-					<li class="first"><a href="#">Pellentesque quis elit non lectus gravida blandit.</a></li>
-					<li><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a></li>
-					<li><a href="#">Phasellus nec erat sit amet nibh pellentesque congue.</a></li>
-					<li><a href="#">Cras vitae metus aliquam risus pellentesque pharetra.</a></li>
-					<li><a href="#">Maecenas vitae orci vitae tellus feugiat eleifend.</a></li>
-				</ul>
-			</div>
-			<div id="column3">
-				<h2>Recommended Links</h2>
-				<ul class="list-style2">
-					<li class="first"><a href="#">Pellentesque quis elit non lectus gravida blandit.</a></li>
-					<li><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a></li>
-					<li><a href="#">Phasellus nec erat sit amet nibh pellentesque congue.</a></li>
-					<li><a href="#">Cras vitae metus aliquam risus pellentesque pharetra.</a></li>
-					<li><a href="#">Maecenas vitae orci vitae tellus feugiat eleifend.</a></li>
-				</ul>
-			</div>
-		</div>
+	<div id="footer-content" class="container" style="text-align : center">
+		<h2>Recommended Links</h2>
+		<ul class="list-style2">
+			<li class="first"><a href="http://www-igm.univ-mlv.fr/~lecroq/string/node14.html#SECTION00140" target="_blank">Boyer-Moore Algorithm</a></li>
+			<li class="first"><a href="http://www-igm.univ-mlv.fr/~lecroq/string/node16.html" target="_blank">Apostolico-Giancarlo Algorithm</a></li>
+			<li class="first"><a href="http://www.sciencedirect.com/science/article/pii/S1570866703000054" target="_blank">A unifying look at the Apostolico–Giancarlo string-matching algorithm</a></li>
+			<li class="first"><a href="http://citeseerx.ist.psu.edu/viewdoc/similar;jsessionid=D5637AB64B4B4532D2E916A10DF22836?doi=10.1.1.50.6752&type=ab" target="_blank">Tight bounds on the complexity of the Apostolico-Giancarlo algorithm</a></li>
+			<li class="first"><a href="http://www.dmi.unict.it/~faro/algocom/prova02/paper01.pdf" target="_blank">A variation on the Boyer-Moore algorithm</a></li>
+		</ul>	
 	</div>
 
 	<div id="footer">
-		<p>© 2012 Untitled Inc. All rights reserved. Lorem ipsum dolor sit amet nullam blandit consequat phasellus etiam lorem. Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.  Photos by <a href="http://fotogrph.com/">Fotogrph</a>.</p>
+		<p>© 2012 Untitled Inc. All rights reserved. Apostolico-Giancarlo Algorithm. Created by Pipin Kurniawati.</p>
 	</div>
 	<!-- end #footer -->
 </body>
